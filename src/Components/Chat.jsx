@@ -115,15 +115,15 @@ class Chat extends React.Component{
     console.log("<br>Difference (Seconds): "+seconds);
 
     if(days !== 0) {
-      return days + ' days' + hours + ' hours' + minutes + ' minutes', + seconds + ' seconds'
+      return days + ' days ' + hours + ' hours ' + minutes + ' minutes ' + seconds + ' seconds'
     }
     
     if(hours !== 0) {
-      return hours + ' hours' + minutes + ' minutes', + seconds + ' seconds'
+      return hours + ' hours ' + minutes + ' minutes ' + seconds + ' seconds'
     }
 
     if(minutes !== 0) {
-      return minutes + ' minutes', + seconds + ' seconds'
+      return minutes + ' minutes ' + seconds + ' seconds'
     }
 
     if(seconds !== 0) {
