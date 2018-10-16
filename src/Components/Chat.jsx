@@ -83,44 +83,52 @@ class Chat extends React.Component{
   }
 
   formatDate() {
+    // Formatando o tempo inicial
+    var actualDate = this.state.timestamp;
+    
+    var formatAd = new Date(actualDate)
+    
+    // Formatando o tempo final
+    
     var date = new Date();
 
-    // Formatando o tempo inicial
-    var actualDate = this.state.timestamp.split(' ');
-    var d = actualDate[1].split(':');
-    var initialHour = parseInt(d[0]);
-    var initialMinutes = parseInt(d[1]);
-    var initialSeconds = parseInt(d[2]);
+    var d = date.toUTCString('pt-BR')
 
-    // Formatando o tempo final
-    var day = date.toLocaleString('pt-BR').split(' ');
-    var f = day[1].split(':');
-    var finalHour = parseInt(f[0]);
-    var finalMinutes = parseInt(f[1]);
-    var finalSeconds = parseInt(f[2]);
+    var formatFd = new Date(d)
 
-    var calculateTimeHour = finalHour - initialHour;
-    var calculateTimeMinutes = finalMinutes - initialMinutes;
-    var calculateTimeSeconds = finalSeconds - initialSeconds;
-  
-    if(calculateTimeHour !== 0) {
-      return (
-        <div>{calculateTimeHour + ' hour ' + calculateTimeMinutes + ' minutes ' + calculateTimeSeconds + ' seconds'}</div>
-      )
-    }
+    var res = Math.abs(formatAd - formatFd) / 1000;
+         
+    // get total days between two dates
+    var days = Math.floor(res / 86400);
+    console.log("<br>Difference (Days): "+days);                        
+    
+    // get hours        
+    var hours = Math.floor(res / 3600) % 24;        
+    console.log("<br>Difference (Hours): "+hours);  
+    
+    // get minutes
+    var minutes = Math.floor(res / 60) % 60;
+    console.log("<br>Difference (Minutes): "+minutes);  
 
-    if(calculateTimeMinutes !== 0) {
-      return (
-        <div>{calculateTimeMinutes + ' minutes ' + calculateTimeSeconds + ' seconds'}</div>
-      )
-    }
+    // get seconds
+    var seconds = res % 60;
+    console.log("<br>Difference (Seconds): "+seconds);
 
-    if(calculateTimeSeconds !== 0) {
-      return (
-        <div>{calculateTimeSeconds + ' seconds'}</div>
-      )
+    if(days !== 0) {
+      return days + ' days' + hours + ' hours' + minutes + ' minutes', + seconds + ' seconds'
     }
     
+    if(hours !== 0) {
+      return hours + ' hours' + minutes + ' minutes', + seconds + ' seconds'
+    }
+
+    if(minutes !== 0) {
+      return minutes + ' minutes', + seconds + ' seconds'
+    }
+
+    if(seconds !== 0) {
+      return seconds + ' seconds'
+    }
   }
 
   render(){
